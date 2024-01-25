@@ -1,4 +1,5 @@
 /// <reference types="vitest/config" />
+import path from "path"
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import cssInjectedByJs from 'vite-plugin-css-injected-by-js'
@@ -11,7 +12,6 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: ['./src/setupTests.ts'],
   },
-  // @ts-ignore
   plugins: [react(), cssInjectedByJs(), ...plugins],
   build: {
     rollupOptions: {
@@ -26,5 +26,10 @@ export default defineConfig({
   server: {
     port: 8080,
     host: true,
+  },
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
   },
 })

@@ -4,5 +4,8 @@
   "semi": false,
   "singleQuote": true,
   "trailingComma": "all",
-  "singleAttributePerLine": true
+  "singleAttributePerLine": true,
+  "plugins": ["prettier-plugin-tailwindcss"],
+  "tailwindFunctions": ["clsx", "twMerge", "cva"],
+  "tailwindConfig": "./tailwind.config.js"
 }

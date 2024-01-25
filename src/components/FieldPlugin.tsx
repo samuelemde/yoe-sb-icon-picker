@@ -1,31 +1,39 @@
-import { FunctionComponent } from 'react'
+import { FC } from 'react'
 import { useFieldPlugin } from '@storyblok/field-plugin/react'
+import IconPicker from '@/components/IconPicker'
+import LoadingSpinner from '@/components/LoadingSpinner'
+import { Cross1Icon } from '@radix-ui/react-icons'
+import { ErrorBoundary } from 'react-error-boundary'
+import IconContextProvider from '@/provider/IconProvider'
 
-const FieldPlugin: FunctionComponent = () => {
-  const plugin = useFieldPlugin({
-    /*
-    The `validateContent` parameter is optional. It allows you to
-      - validate the content
-      - make changes before sending it to the Storyblok Visual Editor
-      - provide type-safety
+type FallbackProps = {
+  error: Error
+}
+const fallbackRenderer: FC<FallbackProps> = ({ error }) => {
+  return (
+    <div className="bg-sb-red-25 flex items-center gap-4 rounded-md p-2.5 pl-[17px]">
+      <Cross1Icon className="bg-sb-red rounded-md p-1 text-white" />
+      {error.message}
+    </div>
+  )
+}
 
-    // For example,
-    validateContent: (content: unknown) => {
-      if (typeof content === 'string') {
-        return {
-          content,
-        }
-      } else {
-        return {
-          content,
-          error: `content is expected to be a string (actual value: ${JSON.stringify(content)})`,
-        }
-      }
-    }
-    */
-  })
+const FieldPlugin: FC = () => {
+  const { type, error } = useFieldPlugin()
 
-  return <pre>{JSON.stringify(plugin, null, 2)}</pre>
+  if (type === 'loading') return <LoadingSpinner size={40} />
+
+  if (type === 'error') {
+    return fallbackRenderer({ error })
+  }
+
+  return (
+    <ErrorBoundary fallbackRender={fallbackRenderer}>
+      <IconContextProvider>
+        <IconPicker />
+      </IconContextProvider>
+    </ErrorBoundary>
+  )
 }
 
 export default FieldPlugin
