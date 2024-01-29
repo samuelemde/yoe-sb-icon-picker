@@ -2,7 +2,7 @@ export type IcoMoonIcon = {
   icon: { paths: string[]; width?: number }
   properties: {
     name: string
-    ligatures: string
+    ligatures?: string
   }
 }
 

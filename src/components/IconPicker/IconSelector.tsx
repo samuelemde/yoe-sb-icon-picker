@@ -114,7 +114,7 @@ const IconSelector: FC = () => {
                           size={20}
                         />
                       )}
-                      {icon.value}
+                      {icon.name}
                     </div>
                   </CommandItem>
                 ))}

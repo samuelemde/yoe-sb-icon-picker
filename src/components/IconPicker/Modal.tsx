@@ -18,8 +18,10 @@ const Modal: FC = () => {
   const { icons, isFont, value, setValue } = useContext(IconContext)
   const [searchTerm, setSearchTerm] = useState('')
 
-  const filteredIcons = icons.filter((icon) =>
-    icon.name.toLowerCase().includes(searchTerm.toLowerCase()),
+  const filteredIcons = icons.filter(
+    (icon) =>
+      icon.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      icon.ligatures?.includes(searchTerm.toLowerCase()),
   )
 
   return (

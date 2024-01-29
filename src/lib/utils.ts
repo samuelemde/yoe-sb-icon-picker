@@ -1,7 +1,6 @@
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
-import { Icon, IconPickerOptions, IconSelection } from '@/types/icon'
-import { parse } from 'opentype.js'
+import { IconSelection } from '@/types/icon'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -14,6 +13,7 @@ export const loadIconsFromIcoMoonSelection = async (url: string) => {
   const icons = iconSelection.icons
     .map((icon) => ({
       name: icon.properties.name
+        .replace(/-/g, '_')
         .split('_')
         .map(
           (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase(),
@@ -22,7 +22,7 @@ export const loadIconsFromIcoMoonSelection = async (url: string) => {
       value: icon.properties.name,
       width: icon.icon.width,
       path: icon.icon.paths[0],
-      ligatures: icon.properties.ligatures.split(','),
+      ligatures: icon.properties.ligatures?.split(','),
     }))
     .sort((a, b) => a.name.localeCompare(b.name))
 
@@ -43,21 +43,6 @@ const loadFont = async (fontUrl: string) => {
   })
   const font = await fontFace.load()
   document.fonts.add(font)
-}
-
-const applyFont = (fontUrl: string) => {
-  const style = `@font-face {
-        font-family: Icons;
-        src: url('${fontUrl}');
-        font-weight: normal;
-        font-style: normal;
-        font-display: block;
-        font-feature-settings: 'liga';
-      }`
-
-  const styleSheet = document.createElement('style')
-  styleSheet.innerText = style
-  document.head.appendChild(styleSheet)
 }
 
 export const loadIconsFromFont = async (fontUrl: string, iconNames: string) => {
