@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { useFieldPlugin } from '@storyblok/field-plugin/react'
-import IconPicker from '@/components/IconPicker'
+import IconPicker from '@/components/IconPicker/IconPicker'
 import LoadingSpinner from '@/components/LoadingSpinner'
 import { X } from 'lucide-react'
 import { ErrorBoundary } from 'react-error-boundary'
@@ -11,8 +11,8 @@ type FallbackProps = {
 }
 const fallbackRenderer: FC<FallbackProps> = ({ error }) => {
   return (
-    <div className="bg-sb-red-25 flex items-center gap-4 rounded-md p-2.5 pl-[17px]">
-      <X className="bg-sb-red rounded-md p-1 text-white" />
+    <div className="flex items-center gap-4 rounded-md bg-sb-red-25 p-2.5 pl-[17px]">
+      <X className="rounded-md bg-sb-red p-1 text-white" />
       {error.message}
     </div>
   )

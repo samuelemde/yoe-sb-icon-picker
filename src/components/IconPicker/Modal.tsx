@@ -37,7 +37,7 @@ const Modal: FC = () => {
         <X />
         <span className="sr-only">Close Modal</span>
       </Button>
-      <div className="lg:grid-cols-16 grid w-full grid-cols-6 gap-4 text-xl sm:grid-cols-10 md:grid-cols-12">
+      <div className="grid w-full grid-cols-6 gap-4 text-xl sm:grid-cols-10 md:grid-cols-12 lg:grid-cols-16">
         <TooltipProvider delayDuration={50}>
           {filteredIcons.map((icon) => (
             <Tooltip key={icon.value}>
@@ -48,8 +48,8 @@ const Modal: FC = () => {
                     className="flex h-full w-full items-center justify-center p-0 text-center shadow hover:border-sb-green hover:bg-background"
                     onClick={() => {
                       setValue(icon.value === value ? '' : icon.value)
-                      actions?.setContent(icon.value)
-                      actions?.setModalOpen(false)
+                      void actions?.setContent(icon.value)
+                      void actions?.setModalOpen(false)
                     }}
                   >
                     {isFont ? (

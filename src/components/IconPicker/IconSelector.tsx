@@ -16,7 +16,7 @@ import {
 } from '@/components/ui/command'
 import { PopoverClose } from '@radix-ui/react-popover'
 import { cn } from '@/lib/utils'
-import SVGIcon from './SVGIcon'
+import SVGIcon from '../SVGIcon'
 import { IconContext } from '@/provider/IconProvider'
 import { useFieldPlugin } from '@storyblok/field-plugin/react'
 import { ChevronDown, Trash, Trash2 } from 'lucide-react'
@@ -24,7 +24,7 @@ import { ChevronDown, Trash, Trash2 } from 'lucide-react'
 const IconSelector: FC = () => {
   const { actions } = useFieldPlugin()
   const [open, setOpen] = useState(false)
-  const { icons, setIcons, isFont, value, setValue } = useContext(IconContext)
+  const { icons, isFont, value, setValue } = useContext(IconContext)
 
   return (
     <div className={cn({ 'h-[400px]': open })}>
@@ -56,7 +56,7 @@ const IconSelector: FC = () => {
                 </div>
                 <Button
                   variant="ghost"
-                  className="rounded-lg bg-transparent p-2 px-3 text-transparent hover:bg-[#EFF1F3] hover:!text-foreground group-hover:text-muted-foreground"
+                  className="rounded-lg bg-transparent p-2 text-transparent hover:bg-[#EFF1F3] hover:!text-foreground group-hover:text-muted-foreground"
                   onClick={(e) => {
                     e.preventDefault()
                     setValue(null)
