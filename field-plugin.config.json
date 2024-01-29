@@ -1,3 +1,16 @@
 {
-  "options": []
+  "options": [
+    {
+      "name": "icoMoonSelectionUrl",
+      "value": ""
+    },
+    {
+      "name": "fontUrl",
+      "value": ""
+    },
+    {
+      "name": "iconNames",
+      "value": ""
+    }
+  ]
 }
