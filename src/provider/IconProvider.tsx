@@ -12,13 +12,13 @@ type IconContextType = {
   icons: Icon[]
   isFont: boolean
   defaultSize?: { width: number; height: number }
-  value: string
+  value: string | null
   setIcons: Dispatch<SetStateAction<Icon[]>>
   setIsFont: Dispatch<SetStateAction<boolean>>
   setDefaultSize: Dispatch<
     SetStateAction<{ width: number; height: number } | undefined>
   >
-  setValue: Dispatch<SetStateAction<string>>
+  setValue: Dispatch<SetStateAction<string | null>>
 }
 
 export const IconContext = createContext<IconContextType>({
@@ -46,7 +46,7 @@ const IconContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
     width: number
     height: number
   }>()
-  const [value, setValue] = useState<string>('')
+  const [value, setValue] = useState<string | null>(null)
 
   const props = {
     icons,

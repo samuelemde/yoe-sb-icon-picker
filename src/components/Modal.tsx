@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/button'
-import { Cross1Icon } from '@radix-ui/react-icons'
+import { X } from 'lucide-react'
 import { FC, useContext, useState } from 'react'
-import { FieldPluginResponse } from '@storyblok/field-plugin'
 import SearchBar from '@/components/SearchBar'
 import {
   Tooltip,
@@ -10,7 +9,6 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
-import { Icon } from '@/types/icon'
 import SVGIcon from '@/components/SVGIcon'
 import { useFieldPlugin } from '@storyblok/field-plugin/react'
 import { IconContext } from '@/provider/IconProvider'
@@ -36,7 +34,7 @@ const Modal: FC = () => {
         className="fixed right-0 top-0 z-50"
         onClick={() => actions?.setModalOpen(false)}
       >
-        <Cross1Icon />
+        <X />
         <span className="sr-only">Close Modal</span>
       </Button>
       <div className="lg:grid-cols-16 grid w-full grid-cols-6 gap-4 text-xl sm:grid-cols-10 md:grid-cols-12">

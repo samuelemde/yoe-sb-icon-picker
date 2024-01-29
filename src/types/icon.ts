@@ -25,5 +25,3 @@ export type IconPickerOptions = {
   fontUrl?: string
   iconNames?: string
 }
-
-export type IconPickerMode = 'svg' | 'font'

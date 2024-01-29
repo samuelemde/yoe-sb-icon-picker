@@ -5,7 +5,6 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 import { Button } from '@/components/ui/button'
-import { ChevronDownIcon } from '@radix-ui/react-icons'
 import {
   Command,
   CommandEmpty,
@@ -20,6 +19,7 @@ import { cn } from '@/lib/utils'
 import SVGIcon from './SVGIcon'
 import { IconContext } from '@/provider/IconProvider'
 import { useFieldPlugin } from '@storyblok/field-plugin/react'
+import { ChevronDown, Trash, Trash2 } from 'lucide-react'
 
 const IconSelector: FC = () => {
   const { actions } = useFieldPlugin()
@@ -40,23 +40,38 @@ const IconSelector: FC = () => {
             size="sb"
           >
             {value ? (
-              <div className="flex items-center gap-4">
-                {isFont ? (
-                  <div style={{ fontFamily: 'IconFont' }}>
-                    {icons.find((icon) => icon.value === value)?.value}
-                  </div>
-                ) : (
-                  <SVGIcon
-                    icon={icons.find((icon) => icon.value === value)!}
-                    size={20}
-                  />
-                )}
-                {icons.find((icon) => icon.value === value)?.name}
+              <div className="group flex w-full items-center justify-between gap-4">
+                <div className="flex items-center gap-4">
+                  {isFont ? (
+                    <div style={{ fontFamily: 'IconFont' }}>
+                      {icons.find((icon) => icon.value === value)?.value}
+                    </div>
+                  ) : (
+                    <SVGIcon
+                      icon={icons.find((icon) => icon.value === value)!}
+                      size={20}
+                    />
+                  )}
+                  {icons.find((icon) => icon.value === value)?.name}
+                </div>
+                <Button
+                  variant="ghost"
+                  className="rounded-lg bg-transparent p-2 px-3 text-transparent hover:bg-[#EFF1F3] hover:!text-foreground group-hover:text-muted-foreground"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setValue(null)
+                    void actions?.setContent(null)
+                  }}
+                >
+                  <Trash2 size={18} />
+                </Button>
               </div>
             ) : (
-              <div className="text-muted-foreground">Select an Icon...</div>
+              <div className="flex w-full items-center justify-between">
+                <div className="text-muted-foreground">Select an Icon...</div>
+                <ChevronDown className="ml-2 h-5 w-5 shrink-0" />
+              </div>
             )}
-            <ChevronDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-screen p-0">
